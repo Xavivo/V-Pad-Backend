@@ -6,28 +6,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 import lombok.Data;
 
 @Entity
-@Table(name = "dishes")
-@Data // Lombok annotation to generate getters, setters, toString, etc.
-public class Dishes {
-
+@Table(name = "ingredient")
+@Data
+public class Ingredient {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
-    private double price;
-
-    @Column(nullable = false)
-    private String ingredients;
-
-    @Column(nullable = false)
-    private String description;
 
 }

@@ -56,6 +56,14 @@
 			<scope>runtime</scope>
         	<version>42.5.4</version>  
     	</dependency>
+		
+		<!--h2 database dependency is just for testing when running in-memory H2 database for testing purposes-->
+		<dependency>
+    		<groupId>com.h2database</groupId>
+    		<artifactId>h2</artifactId>
+    		<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

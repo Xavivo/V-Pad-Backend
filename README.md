@@ -16,9 +16,13 @@ The project is being developed using a modern technology stack, adhering to a Fu
 ### 🧠 Back-end & Services
 
 | Technology | Role | Notes |
-| **Python** | RESTful API Services. | Initial use for business logic, data manipulation, and inventory/order management. |
+| **SpringBoot Java** | RESTful API Services. | Initial use for business logic, data manipulation, and inventory/order management. |
 | **C# (.NET)** | High-Performance Services (Optional) | Exploration for critical microservices or high-demand authentication services. |
 | **Databases (SQL/NoSQL)** | Data Persistence. | (To be defined, will be specified here in the future: e.g., PostgreSQL, MongoDB, etc.) |
 
 Alberto Vázquez Monge
 Francisco Varela Díaz
+
+
+GENERAL COMMENTS:
+- In the Controller package, the @autowired notation is not neccesary, but it helps to understand the code better and what it does

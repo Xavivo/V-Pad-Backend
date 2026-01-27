@@ -26,7 +26,7 @@ public class Order {
     private Double total;
     private String status; // Pending, Completed, Canceled, etc.
 
-    // Relación: Un pedido tiene muchos detalles
+    // One order can have multiple order details
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> details;
 

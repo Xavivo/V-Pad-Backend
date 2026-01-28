@@ -35,7 +35,7 @@ public class DishController {
 
     @PostMapping("/dishes")
     public Dish createDish(@RequestBody Dish dish) {
-        return dishService.createDish(dish);
+        return dishService.saveDish(dish);
     }
 
     @PutMapping("/dishes/{id}")

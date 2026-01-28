@@ -29,6 +29,7 @@ public class DishService {
     public Dish updateDish(Long id, Dish dish) {
         Dish existingDish = dishRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Dish con el id: " + id + " no encontrado"));
+                
         existingDish.setName(dish.getName());
         existingDish.setDescription(dish.getDescription());
         existingDish.setPrice(dish.getPrice());

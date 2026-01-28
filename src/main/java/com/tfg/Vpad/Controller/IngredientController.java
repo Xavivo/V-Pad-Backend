@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tfg.Vpad.Entity.Dish;
 import com.tfg.Vpad.Entity.Ingredient;
 import com.tfg.Vpad.Service.IngredientService;
 @RestController
@@ -35,7 +34,7 @@ public class IngredientController {
 
     @PostMapping("/ingredients")
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
-        return ingredientService.createIngredient(ingredient);
+        return ingredientService.saveIngredient(ingredient);
     }
 
     @PutMapping("/ingredients/{id}")

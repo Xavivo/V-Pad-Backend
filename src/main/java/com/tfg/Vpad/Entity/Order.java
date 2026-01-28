@@ -14,6 +14,8 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "orders") // "order" is a reserved keyword in SQL, so we'll use "orders"
 @Data // Lombok annotation to generate getters, setters, toString, etc.
@@ -29,6 +31,7 @@ public class Order {
 
     // One order can have multiple order details
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<OrderDetail> details;
 
 }

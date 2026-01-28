@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tfg.Vpad.Entity.Dish;
 import com.tfg.Vpad.Service.DishService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:5173") // Made to handle CORS issues with Vite server
@@ -32,5 +35,10 @@ public class DishController {
     @PostMapping("/dishes")
     public Dish createDish(@RequestBody Dish dish) {
         return dishService.createDish(dish);
+    }
+
+    @PutMapping("/dishes/{id}")
+    public Dish updateDish(@PathVariable Long id, @RequestBody Dish dish) {
+        return dishService.updateDish(id, dish);
     }
 }

@@ -11,14 +11,14 @@ The project is being developed using a modern technology stack, adhering to a Fu
 | Technology | Role | Notes |
 | **React (JavaScript/TypeScript)** | Main POS Interface. | Used to build a dynamic, reactive, and modular user interface. |
 | **HTML5 & CSS3** | Structure and Styling. | Application foundation, focusing on a clear and intuitive User Experience (UX). |
-| **Electron** | Desktop Target (Optional) | Evaluation for packaging the web application as a native desktop application (Windows, macOS). |
+| **Electron** | Desktop Target | Evaluation for packaging the web application as a native desktop application (Windows, macOS). |
 
 ### 🧠 Back-end & Services
 
 | Technology | Role | Notes |
 | **SpringBoot Java** | RESTful API Services. | Initial use for business logic, data manipulation, and inventory/order management. |
 | **C# (.NET)** | High-Performance Services (Optional) | Exploration for critical microservices or high-demand authentication services. |
-| **Databases (SQL/NoSQL)** | Data Persistence. | (To be defined, will be specified here in the future: e.g., PostgreSQL, MongoDB, etc.) |
+| **Databases (SQL/NoSQL)** | Data Persistence. | PostgreSQL |
 
 Alberto Vázquez Monge
 Francisco Varela Díaz

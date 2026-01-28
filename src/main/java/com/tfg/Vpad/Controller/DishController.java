@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tfg.Vpad.Entity.Dish;
 import com.tfg.Vpad.Service.DishService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -36,7 +39,7 @@ public class DishController {
     }
 
     @PostMapping("/dishes")
-    public ResponseEntity<Dish> createDish(@RequestBody Dish dish) {
+    public ResponseEntity<Dish> createDish(@Valid @RequestBody Dish dish) {
         Dish savedDish = dishService.saveDish(dish);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDish);
     } // HttpStatus.CREATED = 201 CREATED

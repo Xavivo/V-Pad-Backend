@@ -65,6 +65,19 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    @Transactional
+    public Order updateStatus(Long id, String newStatus) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Pedido no encontrado"));
+
+        order.setStatus(newStatus);
+        return orderRepository.save(order);
+    }
+
+    public List<Order> getOrdersByStatus(String status) {
+        return orderRepository.findByStatus(status);
+    }
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }

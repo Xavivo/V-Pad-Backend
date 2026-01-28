@@ -12,7 +12,6 @@ import com.tfg.Vpad.Entity.Dish;
 import com.tfg.Vpad.Entity.Order;
 import com.tfg.Vpad.Entity.OrderDetail;
 import com.tfg.Vpad.Repository.DishRepository;
-import com.tfg.Vpad.Repository.OrderDetailRepository;
 import com.tfg.Vpad.Repository.OrderRepository;
 import com.tfg.Vpad.DTO.OrderItemDTO;
 import com.tfg.Vpad.DTO.OrderRequestDTO;
@@ -21,64 +20,51 @@ import com.tfg.Vpad.DTO.OrderRequestDTO;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final OrderDetailRepository orderDetailRepository;
     private final DishRepository dishRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, 
-                        OrderDetailRepository orderDetailRepository, 
-                        DishRepository dishRepository) {
+    public OrderService(OrderRepository orderRepository, DishRepository dishRepository) {
         this.orderRepository = orderRepository;
-        this.orderDetailRepository = orderDetailRepository;
         this.dishRepository = dishRepository;
     }
 
     @Transactional
     public Order createOrder(OrderRequestDTO request) {
-        
-        // Create and save the order first (without details)
-        Order order = new Order();
-        order.setDate(LocalDateTime.now());
-        order.setStatus("PENDIENTE");
-        order.setTotal(0.0);
-        
-        // We save first to get the ID
-        Order savedOrder = orderRepository.save(order);
 
-        double calculatedTotal = 0.0;
-        List<OrderDetail> detailsList = new ArrayList<>();
-
-        // Items in JSON request
-        for (OrderItemDTO itemDTO : request.getItems()) {
-            
-            // Search for the dish by ID in the Database
-            Dish dish = dishRepository.findById(itemDTO.getDishId())
-                    .orElseThrow(() -> new RuntimeException("Plato no encontrado con ID: " + itemDTO.getDishId()));
-
-            // Create detail and link to order and dish
-            OrderDetail detail = new OrderDetail();
-            detail.setOrder(savedOrder);
-            detail.setDish(dish);
-            detail.setQuantity(itemDTO.getQuantity());
-            detail.setUnitPrice(dish.getPrice());
-
-            //  We save detail
-            orderDetailRepository.save(detail);
-            
-            // add
-            detailsList.add(detail);
-
-            calculatedTotal += (dish.getPrice() * itemDTO.getQuantity());
+        if (request.getItems() == null || request.getItems().isEmpty()) {
+            throw new IllegalArgumentException("El pedido no puede estar vacío.");
         }
 
-        // Update order with total
-        savedOrder.setTotal(calculatedTotal);
-        savedOrder.setDetails(detailsList); // To see the details in the returned object
-        
-        return orderRepository.save(savedOrder);
+        Order order = new Order();
+        order.setDate(LocalDateTime.now());
+        order.setStatus("PENDING");
+        order.setTotal(0.0);
+
+        List<OrderDetail> details = new ArrayList<>();
+        double total = 0.0;
+
+        for (OrderItemDTO item : request.getItems()) {
+
+            Dish dish = dishRepository.findById(item.getDishId())
+                    .orElseThrow(() -> new IllegalArgumentException("Plato no encontrado: " + item.getDishId()));
+
+            OrderDetail detail = new OrderDetail();
+            detail.setOrder(order);
+            detail.setDish(dish);
+            detail.setQuantity(item.getQuantity());
+            detail.setUnitPrice(dish.getPrice());
+
+            details.add(detail);
+
+            total += dish.getPrice() * item.getQuantity();
+        }
+
+        order.setTotal(total);
+        order.setDetails(details);
+
+        return orderRepository.save(order);
     }
-    
-    // Extra method to fetch all orders (for testing purposes)
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }

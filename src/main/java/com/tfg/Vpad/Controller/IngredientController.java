@@ -5,9 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tfg.Vpad.Entity.Dish;
 import com.tfg.Vpad.Entity.Ingredient;
 import com.tfg.Vpad.Service.IngredientService;
 @RestController
@@ -25,5 +30,10 @@ public class IngredientController {
     @GetMapping("/ingredients")
     public List<Ingredient> getAllIngredients() {
         return ingredientService.getAllIngredients();
+    }
+
+    @PostMapping("/ingredients")
+    public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
+        return ingredientService.createIngredient(ingredient);
     }
 }

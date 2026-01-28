@@ -43,12 +43,14 @@ public class IngredientController {
     } // HttpStatus.CREATED = 201 CREATED
 
     @PutMapping("/ingredients/{id}")
-    public Ingredient updateIngredient(@PathVariable Long id, @RequestBody Ingredient ingredient) {
-        return ingredientService.updateIngredient(id, ingredient);
-    }
+    public ResponseEntity<Ingredient> updateIngredient(@PathVariable Long id, @Valid @RequestBody Ingredient ingredient) {
+        Ingredient updatedIngredient = ingredientService.updateIngredient(id, ingredient);
+        return ResponseEntity.ok(updatedIngredient);
+    } // HttpStatus.OK = 200 OK
 
     @DeleteMapping("/ingredients/{id}")
-    public void deleteIngredient(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteIngredient(@PathVariable Long id) {
         ingredientService.deleteIngredient(id);
-    }
+        return ResponseEntity.noContent().build();
+    } // HttpStatus.NO_CONTENT = 204 NO CONTENT
 }

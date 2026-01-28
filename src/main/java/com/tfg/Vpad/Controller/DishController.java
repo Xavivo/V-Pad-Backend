@@ -45,12 +45,14 @@ public class DishController {
     } // HttpStatus.CREATED = 201 CREATED
 
     @PutMapping("/dishes/{id}")
-    public Dish updateDish(@PathVariable Long id, @RequestBody Dish dish) {
-        return dishService.updateDish(id, dish);
-    }
+    public ResponseEntity<Dish> updateDish(@PathVariable Long id, @Valid @RequestBody Dish dish) {
+        Dish updatedDish = dishService.updateDish(id, dish);
+        return ResponseEntity.ok(updatedDish);
+    } // HttpStatus.OK = 200 OK
 
     @DeleteMapping("/dishes/{id}")
-    public void deleteDish(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteDish(@PathVariable Long id) {
         dishService.deleteDish(id);
-    }
+        return ResponseEntity.noContent().build();
+    } // HttpStatus.NO_CONTENT = 204 NO CONTENT
 }

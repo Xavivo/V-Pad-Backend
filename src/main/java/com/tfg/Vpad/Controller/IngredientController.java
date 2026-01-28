@@ -36,4 +36,9 @@ public class IngredientController {
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
         return ingredientService.createIngredient(ingredient);
     }
+
+    @PutMapping("/ingredients/{id}")
+    public Ingredient updateIngredient(@PathVariable Long id, @RequestBody Ingredient ingredient) {
+        return ingredientService.updateIngredient(id, ingredient);
+    }
 }

@@ -3,6 +3,8 @@ package com.tfg.Vpad.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,9 +36,10 @@ public class DishController {
     }
 
     @PostMapping("/dishes")
-    public Dish createDish(@RequestBody Dish dish) {
-        return dishService.saveDish(dish);
-    }
+    public ResponseEntity<Dish> createDish(@RequestBody Dish dish) {
+        Dish savedDish = dishService.saveDish(dish);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedDish);
+    } // HttpStatus.CREATED = 201 CREATED
 
     @PutMapping("/dishes/{id}")
     public Dish updateDish(@PathVariable Long id, @RequestBody Dish dish) {

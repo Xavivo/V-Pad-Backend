@@ -81,4 +81,13 @@ public class OrderService {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
+
+    @Transactional
+    public void deleteOrder(Long id) {
+    if (!orderRepository.existsById(id)) {
+        throw new IllegalArgumentException("El pedido no existe");
+    }
+    orderRepository.deleteById(id);
+}
+
 }

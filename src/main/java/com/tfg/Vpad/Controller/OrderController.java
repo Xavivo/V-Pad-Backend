@@ -20,7 +20,7 @@ import com.tfg.Vpad.Service.OrderService;
 import com.tfg.Vpad.DTO.OrderRequestDTO;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/orders")
 public class OrderController {
     
     private final OrderService orderService;
@@ -30,7 +30,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/orders")
+    @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequestDTO request) {
         try {
             Order newOrder = orderService.createOrder(request);
@@ -42,12 +42,12 @@ public class OrderController {
         }
     }
     
-    @GetMapping("/orders")
+    @GetMapping
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
-    @PatchMapping("/orders/{id}/status")
+    @PatchMapping("/{id}/status")
     public ResponseEntity<Order> updateOrderStatus( 
             @PathVariable Long id, 
             @RequestBody String newStatus) { 
@@ -59,7 +59,7 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/orders/by-status")
+    @GetMapping("/by-status")
     public List<Order> getOrdersByStatus(@RequestParam String status) {
         return orderService.getOrdersByStatus(status);
     }
